@@ -44,3 +44,86 @@ Let’s take a quick look at how this API works. You can look up the location co
     ]
 }
 ```
+
+Now, back to writing our first SpecFlow feature and using it to create an automated acceptance test. A SpecFlow feature is a file with a .feature file extension, describing the intended behaviour of a specific component or feature of the application you are going to write tests for. An example of a feature for our API would be the ability to return the correct location data based on a country code and zip code, or on a more granular level, supporting the ability to return more than one location for a specific country and zip code (this is very useful for use in the UK and Germany, among other countries).
+
+Feature files contain one or more scenarios that describe the specifics of the behaviour for that feature, often expressed in very concrete examples. These examples are often obtained through following a process known as `Specification by Example`. The process of creating good feature files and scenarios, and techniques on how to improve your skills in this area, are outside the scope of this article.
+
+Here’s an example feature file and three scenarios that describe one of the core features of our API through some examples:
+
+```yaml
+Feature: Returning location data based on country and zip code
+  As a consumer of the Zippopotam.us API
+  I want to receive location data matching the country code and zip code I supply
+  So I can use this data to auto-complete forms on my web site
+
+  Scenario: An existing country and zip code yields the correct place name
+    Given the country code us and zip code 90210
+    When I request the locations corresponding to these codes
+    Then the response contains the place name Beverly Hills
+
+ Scenario: An existing country and zip code yields the right number of results
+   Given the country code us and zip code 90210
+   When I request the locations corresponding to these codes
+   Then the response contains exactly 1 location
+
+  Scenario: An existing country and zip code yields the right HTTP status code
+    Given the country code us and zip code 90210
+    When I request the locations corresponding to these codes
+    Then the response has status code 200
+```
+
+We can add a new feature file to our project by right-clicking the project name and selecting `Add > New Item`. Since we have installed the SpecFlow extension before, we can now select `SpecFlow > SpecFlow Feature File` to add a new feature file to our project:
+
+![im3](images/specflow_add_feature_file.png)
+
+After the feature file has been added to the project, we can edit the specifications in there to reflect the expected behaviour we defined earlier for our zip code API:
+
+![im4](images/specflow_feature_without_stepdefs.png)
+
+The fact that the steps in our scenarios are shown in purple means that there are no step definition methods associated with the steps in the scenarios yet.
+
+You can run the scenarios in this feature and see what happens by:
+
+1. Opening the Test Explorer Window using the menu option Test > Windows > Test Explorer.
+2. Building the project, for example using Ctrl + Shift + B to build all projects in the current solution – this should result in several tests becoming visible in the Test Explorer.
+3. Right-clicking the tests you would like to run and choosing Run Selected Tests.
+Since there is no code to execute, SpecFlow will display an error message:
+
+![im5](images/specflow_no_stepdefs_found_error.png)
+
+Fortunately, SpecFlow offers an easy way to generate these step definitions methods for you. Right-click anywhere in the feature file editor window and select `Generate Step Definitions`, another useful feature that comes with the SpecFlow Visual Studio extension.
+
+![im6](images/stepdefinition_generation_dialog.png)
+
+This will display a window where you can select the steps for which to generate step definition methods, as well as the step definition style. You will read more about the different styles in the next article, for now we are going to stick with the default Regular expressions in attributes option. Click Generate, select the destination for the step definition file and click Save.
+
+A C# .cs file with the generated step definition methods will now be added to your project. Here’s a snippet from that file:
+
+```csharp
+using System;
+using TechTalk.SpecFlow;
+
+namespace testproject_specflow.StepDefinitions
+{
+    [Binding]
+    public class ReturningLocationDataBasedOnCountryAndZipCodeSteps
+    {
+        [Given(@"the country code us and zip code (.*)")]
+        public void GivenTheCountryCodeUsAndZipCode(int p0)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [When(@"I request the locations corresponding to these codes")]
+        public void WhenIRequestTheLocationsCorrespondingToTheseCodes()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Then(@"the response contains the place name Beverly Hills")]
+        public void ThenTheResponseContainsThePlaceNameBeverlyHills()
+        {
+            ScenarioContext.Current.Pending();
+        }
+```
