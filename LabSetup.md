@@ -126,4 +126,27 @@ namespace testproject_specflow.StepDefinitions
         {
             ScenarioContext.Current.Pending();
         }
+    }
 ```
+
+When you check the feature file editor window again, you’ll see that all step definitions have changed from purple to white (or black, depending on your IDE color scheme):
+
+![im7](images/specflow_feature_with_stepdefs.png)
+
+This is definitely good news: SpecFlow now knows what code is associated with the steps in the scenarios, and therefore knows what code to run when we run the feature. Let’s do that again from the Test Explorer:
+
+![im8](images/specflow_stepdefs_not_implemented_error.png)
+
+Now, SpecFlow is telling us that it did find step definitions to execute, but that one or more of the methods it ran are not yet implemented. The reason for this is that when you let SpecFlow generate step definitions, it will automatically add the line:
+
+```csharp
+ScenarioContext.Current.Pending();
+```
+
+as the body of the method. Look at it as a friendly reminder that your work isn’t done yet. When this line is executed, the above error will be thrown.
+
+If we remove this line from all of our step definitions methods and run the feature again, we’ll see this:
+
+![im9](images/specflow_all_steps_passed.png)
+
+Success! Of course, you will still need to add the code that actually invokes the API and performs verifications on the response, but since that’s outside of the responsibility of SpecFlow I won’t go into that in this lab.
