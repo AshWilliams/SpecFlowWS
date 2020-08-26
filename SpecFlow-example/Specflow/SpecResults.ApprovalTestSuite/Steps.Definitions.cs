@@ -1,8 +1,10 @@
 ﻿using System;
 using NUnit.Framework;
 using SpecResults.Json;
-using TechTalk.SpecFlow;
+
 using CalculatorLibrary;
+using TechTalk.SpecFlow;
+
 namespace SpecResults.ApprovalTestSuite
 {
 	[Binding]
