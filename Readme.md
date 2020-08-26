@@ -42,3 +42,5 @@ Besides the core project itself, which is available for free and open sourced un
 * SpecFlow+ LivingDoc, for creating living documentation from feature files for publishing using TFS and Azure DevOps.
 
 If you’re working with Visual Studio to create your automated acceptance tests using SpecFlow, you will also likely benefit from installing and using the SpecFlow Extension for your Visual Studio version. This extension enables, among other features, syntax highlighting for better feature and scenario readability, the ability to jump from a step to its corresponding step definition and generating skeleton step definitions directly from steps.
+
+[Next - Setup Environment](./LabSetup.md)
