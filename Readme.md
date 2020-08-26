@@ -28,3 +28,17 @@ Some tools that are often used in combination with SpecFlow to form a test autom
 * A library that generates human-readable reports, often in HTML format. Two popular examples of this category of tools are Allure and ExtentReports.
 
 ![im2](images/sketch1-1.png)
+
+>- Note: the arrow between SpecFlow and the unit testing framework is bidirectional because it step definitions contain code that is part of the unit testing framework (including assertions), but the unit testing framework in turn takes care of running the SpecFlow features and scenarios too. 
+
+
+## The SpecFlow Ecosystem
+In the previous section above, you have seen that it takes more than just using SpecFlow to write and run automated tests against your application. Having established that, let’s take a quick look at the tools available in the SpecFlow ecosystem.
+
+Besides the core project itself, which is available for free and open sourced under the New BSD license here, the people behind the SpecFlow project have also created a set of extensions collectively known as SpecFlow+. In this collection, you’ll find:
+
+* SpecFlow+ Runner, a test runner specifically written for SpecFlow.
+* SpecFlow+ Excel, allowing you to leverage the power of Microsoft Excel to create features and scenarios.
+* SpecFlow+ LivingDoc, for creating living documentation from feature files for publishing using TFS and Azure DevOps.
+
+If you’re working with Visual Studio to create your automated acceptance tests using SpecFlow, you will also likely benefit from installing and using the SpecFlow Extension for your Visual Studio version. This extension enables, among other features, syntax highlighting for better feature and scenario readability, the ability to jump from a step to its corresponding step definition and generating skeleton step definitions directly from steps.
